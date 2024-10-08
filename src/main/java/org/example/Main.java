@@ -1,51 +1,28 @@
 package org.example;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
 
-        int[] zahlen1 = {5, 1, 4, 9, 0, 8, 6, 34, 14, 66, 99, 34, 23, 15, 65};
-        int[] zahlen2 = {5, 1, 4, 9, 0, 8, 6, 34, 14, 66, 99, 34, 23, 15, 65};
-        int[] zahlen3 = {5, 1, 4, 9, 0, 8, 6, 34, 14, 66, 99, 34, 23, 15, 65};
+        BubbleSort<Integer> bubble = new BubbleSort<Integer>();
+        SelectionSort<Integer> selection = new SelectionSort<Integer>();
 
-        //int[] zahlen3 = {5, 8, 1, 4, 9, 0, 8, 6};
-        //int[] zahlen3 = {3, 12, 5, 2, 14, 9, 8, 11, 4, 1, 10, 16, 7, 6, 17, 15, 13};
+        GenericSort<Integer> sorter = selection;
 
 
-        int[] ergebnis;
+        // Erzeuge eine Liste mit 10 Zahlen
+        Integer[] zahlen = SortHelper.createInteger(20, 100);
+        // Integer[] zahlen = { 1, 7, 2, 3, 0, 5, 7};
+        sorter.add(zahlen);
 
+        SortHelper.print(sorter.get());
+        System.out.println("");
+        System.out.println("");
 
-        System.out.println("Zahlen1");
-        ausgabe(zahlen1);
-        System.out.println("Bubble");
-        ergebnis = GenSort.bubbleSortOpt(zahlen1);
-        SortHelper.ausgabe(zahlen1);
-        SortHelper.ausgabe(ergebnis);
-
-        /*
-        System.out.println("Selection");
-        ergebnis = GenSort.selectionSort(zahlen2);
-        SortHelper.ausgabe(ergebnis);
-
-        ergebnis = GenSort.quicksort(zahlen3);
-        System.out.println("Quicksort");
-        SortHelper.ausgabe(ergebnis);
-
-         */
+        System.out.println(sorter.sort());
 
 
     }
-
-
-
-
-    public static void ausgabe(int[] zahlen) {
-
-        for(int i=0; i < zahlen.length; i++) {
-            System.out.printf("%d ",zahlen[i]);
-        }
-        System.out.println();
-    }
-
-
 
 }
