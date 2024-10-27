@@ -42,6 +42,10 @@ public abstract class GenericSort<T extends Comparable<T>> {
         return this.elements;
     }
 
+    public void clear() {
+        this.elements = new ArrayList<>();
+    }
+
 
     /**
      * Tauscht zwei Objekte in der Liste
@@ -49,11 +53,11 @@ public abstract class GenericSort<T extends Comparable<T>> {
      * @param i Index des 1. Objekts
      * @param j Index des 2. Objekts
      * @throws IndexOutOfBoundsException – Falls einer der Indexe außerhalb der Liste liegt
+     * @see Collections
      */
     protected void swap(int i, int j) {
-        T temp = this.elements.get(i);
-        this.elements.set(i, this.elements.get(j));
-        this.elements.set(j, temp);
+        // Tausch wird mit der swap-Methode der Collections-Class durchgeführt
+        Collections.swap(this.elements,i,j);
     }
 
     /**
