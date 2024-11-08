@@ -60,6 +60,11 @@ public abstract class GenericSort<T extends Comparable<T>> {
         Collections.swap(this.elements,i,j);
     }
 
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
+
+
     /**
      * Sortiert die interne Liste, muss von einer Unterklasse implementiert werden
      *
