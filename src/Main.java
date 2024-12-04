@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+  import java.util.HashMap;
 
 /**
  * Hauptklasse
@@ -17,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
 
         // Liste mit den zu testenden Algorithmen
-        HashMap<String, GenericSort> sortingAlgorithms = new HashMap<>();
+        HashMap<String, GenericSort<Integer>> sortingAlgorithms = new HashMap<>();
         sortingAlgorithms.put("bubble", new BubbleSort<>());
         sortingAlgorithms.put("selection", new SelectionSort<>());
         sortingAlgorithms.put("quick", new QuickSort<>());
@@ -26,7 +24,7 @@ public class Main {
 
 
         // Menge der zu sortierenen Objekte pro Durchfang
-        int[] numElements = {1000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 200000, 500000, 1000000, 5000000, 10000000, 50000000};
+        int[] numElements = {1000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 100000,200000, 500000, 1000000, 5000000, 10000000, 20000000, 40000000};
         // int[] numElements = {1000, 2000, 5000};
 
         // CSV-Logger
@@ -42,11 +40,11 @@ public class Main {
             }
 
             // Bei Messungen mit > 100k Objekten Selection ausschließen
-            if(number > 100000) {
+            if(number > 200000) {
                 sortingAlgorithms.remove("selection");
             }
 
-            for (GenericSort algorithm : sortingAlgorithms.values()) {
+            for (GenericSort<Integer> algorithm : sortingAlgorithms.values()) {
 
                 System.out.println("Sortiere nach "+algorithm.toString()+" mit "+number+" Elementen");
 
