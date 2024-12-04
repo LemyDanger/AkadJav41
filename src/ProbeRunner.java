@@ -1,19 +1,30 @@
-package org.example;
-
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Klasse zur Durchführung einer Zeitmessung für verschiedene Sortieralgorithmen
+ */
+
 public class ProbeRunner {
 
+    // Die zu sortierenden Daten
     private Integer[] sortData;
 
+    /**
+     * Constructor
+     * @param numElements Anzahl der zu erzeugenden Zahlwerte
+     */
     public ProbeRunner(int numElements) {
         this.createData(numElements);
     }
 
+    /**
+     * Erzeugt die Daten für die Messung
+     * @param numElements Anzahl der zu erzeugenden Zahlwerte
+     */
     private void createData(int numElements) {
         this.sortData = new Integer[numElements];
         Random random = new Random();
@@ -23,13 +34,18 @@ public class ProbeRunner {
         }
     }
 
+    /**
+     * Führt die einzelnen Messungen inkl. Warm-Up durch
+     * @param sort Der zu messende Sortieralgrothmus
+     * @param numProbes Anzahl der Messungen
+     * @return Array mit Messergebnissen
+     */
     public SortMetrics runTest(GenericSort<Integer> sort, int numProbes) {
 
         // Ablage der einzelnen Messwerte
         long[] probeTimes = new long[numProbes];
 
-        System.out.println("================ WARM UP ====================");
-
+        // Führe einen Warmup-durch, der Algorthmus wird vor der Messung 3xdurchgeführt
         for (int probeRun = 0; probeRun < 3; probeRun++) {
             // Lege eine neue Kopie der Daten an
             Integer[] probeData = Arrays.copyOf(this.sortData, this.sortData.length);
@@ -38,45 +54,41 @@ public class ProbeRunner {
             sort.sort();
         }
 
-
-
-            System.out.println("============================================================");
-        System.out.println("Starte Messung für " + sort.toString() + "Anzahl Elemnte: " + this.sortData.length);
-
+        // Führe die eigentliche Messung durch
         for (int probeRun = 0; probeRun < numProbes; probeRun++) {
+
             // Lege eine neue Kopie der Daten an
             Integer[] probeData = Arrays.copyOf(this.sortData, this.sortData.length);
 
             // Setze das Sortier-Objekt zurück
             sort.clear();
             sort.add(probeData);
+
+            // Gargage Collector vor der Messung ausführen
             System.gc();
 
             Instant start = Instant.now();
             List<Integer> sortData = sort.sort();
             Instant end = Instant.now();
             Duration duration = Duration.between(start, end);
-
-            System.out.println("Lauf " + probeRun + ": " + duration.toMillis() + " Millisekunden");
-            // System.out.println("ProbeHash: " + probeHash + " SortHash: " + sortHash);
-
             probeTimes[probeRun] = duration.toMillis();
 
         }
-        System.out.println("------------------------------------------");
-        return new SortMetrics(sort.getClass().getSimpleName(), this.sortData.length, probeTimes);
-
+        return new SortMetrics( sort.getClass().getSimpleName(), this.sortData.length, probeTimes);
     }
 
-    private int getHash(Integer[] numbers) {
-        return Arrays.hashCode(numbers);
-    }
-
-
+    /**
+     * Liefert Anzahl der Testdaten
+     * @return Anzahl der Elemente
+     */
     public int getNumOfElements() {
         return this.sortData.length;
     }
 
+    /**
+     * Liefert die Testdaten
+     * @return Testdaten
+     */
     public String getData() {
         return Arrays.toString(this.sortData);
     }

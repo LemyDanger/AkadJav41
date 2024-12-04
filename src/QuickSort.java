@@ -1,5 +1,3 @@
-package org.example;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -39,7 +37,7 @@ public class QuickSort<T extends Comparable<T>> extends GenericSort<T> {
             // Teile die Menge und empfange den Index des Pivot
             pivotIndex = this.divide(left, right);
 
-            // Sortiere die zwei Mengen
+            // Sortiere die zwei Teil-Mengen
             this.quickSort(left, pivotIndex - 1);
             this.quickSort(pivotIndex + 1, right);
         }

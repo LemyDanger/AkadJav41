@@ -1,12 +1,9 @@
-package org.example;
-
 import java.util.*;
 
 /**
  * Generische Basisklasse zur Sortierung von Objekten
  *
- * @param <T> Der Typ der zu sortierenden Objekte.
- *            Das Objekt muss zur Vergleichbarkeit das Comparable-Interface implementieren
+ * @param <T> Der Typ der zu sortierenden Objekte. Das Objekt muss zur Vergleichbarkeit das Comparable-Interface implementieren
  */
 public abstract class GenericSort<T extends Comparable<T>> {
 
@@ -42,6 +39,9 @@ public abstract class GenericSort<T extends Comparable<T>> {
         return this.elements;
     }
 
+    /**
+     * Löscht die interne Liste der Dokumente
+     */
     public void clear() {
         this.elements = new ArrayList<>();
     }
@@ -57,9 +57,13 @@ public abstract class GenericSort<T extends Comparable<T>> {
      */
     protected void swap(int i, int j) {
         // Tausch wird mit der swap-Methode der Collections-Class durchgeführt
-        Collections.swap(this.elements,i,j);
+        Collections.swap(this.elements, i, j);
     }
 
+    /**
+     * Gibt den Namen der sortierenden Klasse zurück
+     * @return Klassenname
+     */
     public String toString() {
         return this.getClass().getSimpleName();
     }

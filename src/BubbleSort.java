@@ -1,5 +1,3 @@
-package org.example;
-
 import java.util.List;
 
 /**
@@ -20,8 +18,13 @@ public class BubbleSort<T extends Comparable<T>> extends GenericSort<T> {
         int i, j;
         int n = this.elements.size();
 
+        // Durchlaufe die Daten von Ende bis Anfang
         for (i = n - 1; i > 0; i--) {
+
+            // Durchlaufe die Daten von Anfang bis Ende
             for (j = 0; j < i; j++) {
+
+                // Falls die Reihenfolge von zwei Elementen noch nicht stimmt, tausche diese
                 if (this.elements.get(j).compareTo(this.elements.get(j + 1)) > 0) {
                     this.swap(j, j + 1);
                 }
